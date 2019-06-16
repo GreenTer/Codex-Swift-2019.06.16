@@ -1,0 +1,77 @@
+************************************        # Classses
+Классы - ссылочный тип, традиционно называют объектом.
+Когда новой переменной присваиваешь класс, 
+то знай - что поменяешь значение в одном месте - поменяется ВЕЗДЕ!
+Класс работает как ссылка! (в отличаи от структуры)!
+
+При создании класса, после значений, должна быть инициализация(хоть пустая, но должна быть (в отличаи от структуры))
+
+
+class StudentClass {                        // 
+    var name : String
+    var age : Int
+    
+    init() {                                // инициализация (она как предохранитель, значение по умолчанию!)
+        name = "No name"
+        age = 20
+    }
+    
+    init(name: String, age: Int) {          // условия для ...
+        self.name = name                    // property name, это когда совпадают названия! В создании и инициализации
+        self.age = age
+    }
+}
+
+let stClass = StudentClass(name: "Bob", age: 18)
+
+stClass.name = "Alex"
+stClass.age = 21
+
+Мы можем менять значения! т.к. в классе var!! 
+А вот в Структуре, не можем! 
+При подобных обстоятельствах!
+
+-----------------                           // разбор памяти Классов!
+var stClass2 = stClass                      // ссылка на переменную! поменяешь в одном месте, поменяется во всех!
+print(stClass)
+print(stClass2)
+
+stClass2.name = "Aaa"
+stClass2.age = 18
+
+print(stClass.name)
+print(stClass2.name)
+
+
+************************************        # Structures
+Структура
+
+struct StudentStruct {                      // значения 
+    var name:String
+    var age:Int
+}
+
+let stStruct = StudentStruct(name: "Sam", age: 24)
+stStruct.name = "Sam2"  <- Error
+
+Var stStruct = StudentStruct(name: "Sam", age: 24)
+stStruct.name = "Sam2"  <- Good
+
+
+func addOneYear(student: StudentClass) {
+    student.age += 1
+}
+
+func addOneYear(student: inout StudentStruct) {     - inout делает из Структуры, как Класс, т.к. в Структуре - переменная let
+    student.age += 1
+}
+
+
+// разбор памяти Структуре!
+var stStruct2 = stStruct        // новая переменная!! в Структуре
+stStruct2.name = "Vasya"
+stStruct2.age = 11
+print(stStruct)
+print(stStruct2)
+
+

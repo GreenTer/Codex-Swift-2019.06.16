@@ -1,0 +1,254 @@
+************************************        # 
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn(direction: Direction)         - задаём характеристики для метода .Turn и присваиваем ему другой enum !!!
+
+    enum Direction : String {               - создали enum Direction для метода Turn в enum'e Action
+        case Left = "Left!"
+        case Right = "Right!"
+    }
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+switch action {                             - swich обрабатывает переменную action в которой содержатся методы enum'a Action
+case .Stop:                                 - при вызове метода .Stop
+    print("Stop")                           - выводит фразу "Stop"
+
+case .Walk(meters: let meters) where meters < 100:  - дополнительные условия!
+    print("Short walk")
+
+case .Walk(meters: _):                      - выведится, если предыдущие условия не будут выполнены
+    print("Long walk")
+
+case .Turn(direction: let dir) where dir == .Left:    - в методе .Turn если переменная вызывает == методу .Left то...
+    print("You are turn LEFT")
+case .Turn(direction: let dir) where dir == .Right:   - в методе .Turn если переменная вызывает == методу .Right то...
+    print("You are turn RIGHT")
+default: break
+}
+
+print(Action.Direction.Left.rawValue)       - вывкдет "Left!"
+
+-----------------                           # 
+//let test = NameFigures.RawValue("King")
+let test = NameFigures(rawValue: "King")
+.rawValue                                   - вывести значение переменной
+
+
+************************************        # enum Int
+enum Chess : Int {
+  case King
+  case Queen
+  case Rook
+  case Bishop
+  case Knight
+  case Pawn
+}
+Chess.King      \\ 0
+Chess.Bishop    \\ 3
+
+
+************************************        # mutating в enum в func + mutating, для использования значения self
+enum CompassPoint {
+    case north, south, east, west
+    mutating func turnNorth() {
+        self = .north
+    }
+}
+var currentDirection = CompassPoint.west
+let rememberedDirection = currentDirection
+currentDirection.turnNorth()
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+************************************        # I пример, на котором всё понятно
+enum Action {
+    case Walk
+    case Run
+    case Stop
+    case Turn
+}
+
+var action = Action.Run
+action = .Stop                              - action = Action.Stop
+action = .Walk                              - action = Action.Walk
+
+-----------------                           # II
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+-----------------                           # III
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+switch action {                             - swich обрабатывает переменную action в которой содержатся методы enum'a Action
+case .Stop:                                 - при вызове метода .Stop
+    print("Stop")                           - выводит фразу "Stop"
+
+case .Walk(meters: let meters):             - при вызове метода (case .Walk(let meters): так тоже можно!!)
+  print("Walk \(meters) meters")            - выводит фразу, и параметры
+default: break
+}
+
+-----------------                           # IV
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+switch action {                             - swich обрабатывает переменную action в которой содержатся методы enum'a Action
+case .Stop:                                 - при вызове метода .Stop
+    print("Stop")                           - выводит фразу "Stop"
+
+case .Walk(meters: let meters) where meters < 100:  - дополнительные условия!
+    print("Short walk")
+
+case .Walk(meters: let _):                  - выведится, если предыдущие условия не будут выполнены
+    print("Long walk")
+default: break
+}
+
+-----------------                           # V
+//enum Direction {
+//    case Left
+//    case Right
+//}
+//
+//enum Action {
+//    case Walk(meters: Int)
+//    case Run(meters: Int, speed: Int)
+//    case Stop
+//    case Turn(direction: Direction)
+//}
+
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn(direction: Direction)         - задаём характеристики для метода .Turn и присваиваем ему другой enum !!!
+
+    enum Direction {                        - создали enum Direction для метода Turn в enum'e Action
+        case Left
+        case Right
+    }
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+switch action {                             - swich обрабатывает переменную action в которой содержатся методы enum'a Action
+case .Stop:                                 - при вызове метода .Stop
+    print("Stop")                           - выводит фразу "Stop"
+
+case .Walk(meters: let meters) where meters < 100:  - дополнительные условия!
+    print("Short walk")
+
+case .Walk(meters: _):                      - выведится, если предыдущие условия не будут выполнены
+    print("Long walk")
+
+case .Turn(direction: let dir) where dir == .Left:    - в методе .Turn если переменная вызывает == методу .Left то...
+    print("You are turn LEFT")
+case .Turn(direction: let dir) where dir == .Right:   - в методе .Turn если переменная вызывает == методу .Right то...
+    print("You are turn RIGHT")
+default: break
+}
+
+-----------------                           # VI
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn(direction: Direction)         - задаём характеристики для метода .Turn и присваиваем ему другой enum !!!
+
+    enum Direction : String {               - создали enum Direction для метода Turn в enum'e Action
+        case Left = "Left!"
+        case Right = "Right!"
+    }
+}
+
+var action = Action.Run(meters: 20, speed: 15)
+action = .Stop                              - action = Action.Stop
+action = .Walk(meters: 10)                  - action = Action.Walk(meters: 10)
+
+switch action {                             - swich обрабатывает переменную action в которой содержатся методы enum'a Action
+case .Stop:                                 - при вызове метода .Stop
+    print("Stop")                           - выводит фразу "Stop"
+
+case .Walk(meters: let meters) where meters < 100:  - дополнительные условия!
+    print("Short walk")
+
+case .Walk(meters: _):                      - выведится, если предыдущие условия не будут выполнены
+    print("Long walk")
+
+case .Turn(direction: let dir) where dir == .Left:    - в методе .Turn если переменная вызывает == методу .Left то...
+    print("You are turn LEFT")
+case .Turn(direction: let dir) where dir == .Right:   - в методе .Turn если переменная вызывает == методу .Right то...
+    print("You are turn RIGHT")
+default: break
+}
+
+print(Action.Direction.Left.rawValue)       - вывкдет "Left!"
+
+
+
+
+
+
+
+
+
+
+
+
+enum Action {
+    case Turn(direction: Direction)
+    
+    enum Direction : String {
+        case Left = "Left!"
+        case Right = "Right!"
+    }
+}
+
+var direction = Action.Direction(rawValue: "Right!")!
+action = .Turn(direction: direction)
+
+switch action {
+
+case .Turn(direction: let dir) where dir == .Left:
+    print("You are turn LEFT")
+
+case .Turn(direction: let dir) where dir == .Right:     - выведится эта строка
+    print("You are turn RIGHT")
+
+default: break
+}

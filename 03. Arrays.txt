@@ -1,0 +1,94 @@
+************************************        # массивы
+let/var name_array = [something]            - создать
+let constArray     = ["a", "b", "c", "d"]   - создать
+var array          = [String]()             - создать
+var array_1 = Array(repeating: name, count: x_times)  - создают name x - рас (2,3 и т.д.)
+
+array[0]                                    - показать нулевой символ символ из массива
+
+-----------------                           # примеры 
+var array_2: Set<String> = ["Rock", "Classical", "Hip hop"]
+var array_2 = ["Rock", "Classical", "Hip hop"]
+
+let array_tuple = ["January" : 31, "February" : 28, "March" : 31]
+for value in array_tuple {
+    print("\(value.0) - \(value.1)")
+}
+
+
+************************************        # добавить в массив
+array += ["e"]                              - прибавить к массиву ["e"]
+array.append("f")                           - добавить в конец массива, добавить ("f")
+array.insert("name")                        - добавить в начало массива, добавить ("name")
+array.insert("-", at: 3)                    - поставить "-" в порядковый индекс 3 со смещением всех данных вправо
+
+array += array_2                            - добавить в массив, другой массив
+
+
+************************************        # удалить из массива, или замена
+array_2[0] = "1"                            - index под номером 0 в массиве, заменить на "1"
+array.removeAll()                           - удалить всё из массива
+array.remove(at: 3)                         - удалить значение под индексом 3
+array.​removeLast​()                          - удалить последний элемент массива
+array[1...4]                                - удалить с массива индексы с 1 по 4 включительно
+array[1...4] = ["0"]                        - удалить вырезанный элемент, на "0
+
+
+************************************        # поиск по массиву, сортировка
+array.keys                                  - вывести все ключи
+array.values                                - вывести все значения
+array.sorted()                              - сортировать по алфавиту(либо условия, какие зададим)/(или пишем условия, на результат Bool)
+
+
+************************************        # действия с 2 массивами
+Массив должен быть обязательно Set!
+Как к нему придти - let arr2 = Set(arr1) как пример
+
+let oddDigits: Set = [1, 3, 5, 7, 9]
+let evenDigits: Set = [0, 2, 4, 6, 8]
+let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
+ 
+oddDigits.union(evenDigits).sorted()                              - новый массив состоящий из всех переменных обоих массивов // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+oddDigits.intersection(evenDigits).sorted()                       - новый массив из общих переменных обоих массивов // []
+oddDigits.subtracting(singleDigitPrimeNumbers).sorted()           - новый массив из переменных, которых нет во 2ом массиве // [] // [1, 9]
+oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()   - новый массив из объедененных 2х массивов без повторения переменных! // [] // [1, 2, 9]
+
+let houseAnimals: Set = ["собака", "кошка"]
+let farmAnimals: Set = ["корова", "курица", "баран", "собака", "кошка"]
+let cityAnimals: Set = ["ворона", "мышь"]
+ 
+houseAnimals.isSubset(of: farmAnimals)      - для определения все ли значения множества содержатся в указанном множестве // true
+farmAnimals.isSuperset(of: houseAnimals)    - чтобы определить содержит ли множество все значения указанного множества // true
+farmAnimals.isDisjoint(with: cityAnimals)   - для определения того, отсутствуют ли общие значения в двух множествах или нет // true
+
+-----------------                           # примеры
+var arr_1 = [[1,1], [2,2]]
+var arr_2 = [[2,2], [1,1]]
+
+func test(arr_1: [Array<Int>], arr_2: [Array<Int>]) {
+    var rez = 0
+    var arr1 = [Int]()
+    var arr2 = [Int]()
+    
+    for each in arr_1 {
+        arr1.append(Int(each[0]))
+        arr1.append(Int(each[1]))
+    }
+
+    for each in arr_2 {
+        arr2.append(Int(each[0]))
+        arr2.append(Int(each[1]))
+    }
+    print(arr1)
+    print(arr2)
+    
+    if Set(arr1).subtracting(Set(arr2)).count == 0 {
+        print("Win")
+    }
+}
+
+test(arr_1: arr_1, arr_2: arr_2)
+
+
+
+18 урок по обжектив C посмотри!!!

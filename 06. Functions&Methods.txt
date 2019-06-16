@@ -1,0 +1,91 @@
+************************************        # Functions
+Если параметру добавить # - то он становится как внешним, так и внутренним! //уже не работает
+
+func name_funct (namePeremennoy name_param_1 : (String+), name_param_2 : Int...) -> String+ {}
+
+создаётся имя функции, условия приёма параметров -> что вернёт в итоге (параметр, тюпл, массив - что хочешь)
+Int... означает, что в эту характеристику, можем всовывать свои значения
+
+-----------------
+func calculateMoney (inRange nominal : [Int], type: Int) -> (total : Double, count : Int) {}
+
+Создали функцию с именем calculateMoney, внутри с параметром (nominal : [Int], type: Int)
+под названием (inRange) не обязательно писать, но желательно!
+И это всё - вернёт нам tuple с названием : параметрами (total : Double, count : Int)
+Можно вернуть tuple с параметрами и без названия (Double, Int)
+
+-----------------
+func calculateMoney (inRange nominal : [Int], type: Int) -> (total : Double?, count : Int) {}
+func calculateMoney (inRange nominal : [Int], type: Int) -> (total : Double?, count : Int?) {}
+func calculateMoney (inRange nominal : [Int], type: Int) -> (total : Double?, count : Int)? {}
+
+Optional banding можем сделать для любой возвращаемой переменной, либо всего tupl и т.д.!!
+Если вдруг что-то не срослось, чтобы возвращало то, что смогло посчитать
+
+-----------------
+func sayHi() {}
+func sayHi() -> () {}
+
+Эти записи - идентичны
+
+
+************************************        # примеры
+let wallet = [100, 50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01, 1, 1, 1, 5, 5, 5]
+
+func calculateMoney (peremennaya_kotoryu_budem_schitat: [Double], type_nominal_money: Double ) -> Double {
+    sum = Double()
+
+    for value in peremennaya_kotoryu_budem_schitat {
+        
+        if value == type_nominal_money {
+            sum += value
+        }
+    }
+    
+    return sum
+}
+
+let money = calculateMoney(peremennaya_kotoryu_budem_schitat: wallet, type_nominal_money: 1)
+
+-----------------
+func calculateMoney_x (inSequence range: Double...) -> Double {   - Double... означает, что в эту характеристику, можем всовывать свои значения (смотри ниже calculateMoney_x)
+    
+    var sum : Double = 0
+    for value in range {
+        sum += value
+    }
+    
+    return sum
+}
+
+calculateMoney_x(inSequence: 5,5,56,55,423,12)                    - в параметр inSequence: вводим либо свои параметры, либо можем вписать переменную, которую нужно посчитать
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+************************************        # методы (mutating func)
+Используются внутри struct, enum
+self - всегда указывает на того товарища, которого вызвали
+Если метод вызвал энум, селф будет указывать на энум
+Если метод вызвал экземпляр класса, то он укажет на экземпляр класса
+
+-----------------
+struct Point {
+    var x : Int
+    var y : Int
+    
+//    mutating func move(byX x: Int, andY y: Int) { // mutating меняет саму property!
+//        self.x += x
+//        self.y += y
+//    }
+
+    mutating func move(byX x: Int, andY y: Int) { // mutating меняет саму property! (only for var)
+        self = Point(x: self.x + x, y: self.y + y)
+    }
+}
+
+var p = Point(x: 1, y: 1)
+p.move(byX: 2, andY: 3)
+p.x
+p.y

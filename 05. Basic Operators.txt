@@ -1,0 +1,148 @@
+************************************        # определения
+break                                       - использовать для вывода из цикла, либо когда пустая трока в цикле
+continue                                    - игнорирует условия ниже, пока собледены условия
+fallthrough                                 - для перехода на следующую строку, если даже условие было выполненно!
+
+-----------------                           # P.S.
+Optional binding                            - это когда в блоке (if, for) создаёшь переменную (if var = 5, if let = 5) к примеру и она варьируется, исключительно в блоке
+Value banding                               - это когда в блоке (swith) создаёшь переменную (case var = 5, case let = 5) к примеру и она варьируется, исключительно в блоке
+Value tipe                                  - enum
+
+
+************************************        # цикл switch
+switch name {                               - метод для name
+  case 0...5 :                              - условия повтора от 0 до 5 включительно
+    print("something")
+  case "name" where age < 50 :              - условия для name где age < 50
+    print("Worker")
+  case let a as Int :                       - value banding
+    print("Int")
+  case _ as Int :                           - условия для переменной (wilecut) в нашем случае (проверяет все переменные), если она оказалась Int то..
+    print("Int")
+  case let (a,b) where a == b :             - условия для переменных (a,b) в нашем случае, если они оказалась Int то..
+    print("a==b")
+  case (_, let number) where number >= 65 && number <= 70 :
+    print("Hi old man")
+
+  default:                                  - использовать для вывода из цикла, либо когда пустая трока в цикле
+    break
+}
+
+-----------------                           - в условии, можно писать алфавит и цифры!
+case "a"..."z" : return true
+case "0"..."9" : return false
+
+
+************************************        # цикл if
+if условия {}                               - оформление
+if array.count == 0 {}                      - если размерность массива == 0, то true\falce
+if array.isEmpty {}                         - оже самое что и выше, только проще
+
+if array_2 = array_1.updateValue.updateValue(forKey:) {}              - возвращает опциональное значение соответствующее типу значения словаря. Например, для словаря, который хранит String значения, метод возвратит String? тип, или " опциональный String". Это опциональное значение содержит старое значение для этого ключа, если оно существовало до обновления, либо nil если значение не существовало
+if array_2 = array_1.updateValue("Dublin Airport", forKey: "DUB") {}  - пример
+
+-----------------
+if let airportName = airports["DUB"] {
+  print("The name of the airport is \(airportName).")
+} else {
+  print("That airport is not in the airports dictionary.")
+}
+
+-----------------                           # ??
+c = (a < b) ? a : b                         - если (a < b) тогде если true - о выведет (а), а если falce то выведет (b)
+c = n ?? x                                  - n true/falce nil? если да, то взять значение x
+
+var number1 = Int(var1) ?? 0
+var str1 = (Int(var1) != nil) ? var1 : "nil"
+
+
+************************************        # цикл FOR
+for name_цикла in name_переменной {}        - задаём имя цикла, для определенной переменной
+for value in money {}                       - 
+for (index, value) in NAME.enumerated() {}  - задаём цикла, для переберания всехго содержимого в переменной с index и value(каждый элемент в массиве)
+for i in 0..<name_переменной.count {}       - задаём имя цикла 0-name_переменной, name_переменной.count считает с 1
+for genre in favoriteGenres.sorted() {}     - сортирует данные по алфавиту
+
+
+************************************        # сравнения
+(==)                                        - «равенства»
+(!=)                                        - «неравенства»
+(&&) (&& = * означает true = 1, facle = 0)  - и (приоритет выше, чем у или)
+(||) (|| = + означает true = 1, facle = 0)  - или (приоритет ниже, чем у и)
+
+-----------------
+true  = 1
+facle = 0
+true  &&(*) true  = true
+true  &&(*) falce = falce
+falce &&(*) true  = falce
+falce &&(*) falce = falce
+
+-----------------
+true  ||(+) true  = true
+true  ||(+) falce = falce
+falce ||(+) true  = falce
+falce ||(+) falce = falce
+
+-----------------
+(a == b)                                    - равно            
+(a != b)                                    - не равно
+(a > b)                                     - больше
+(a < b)                                     - меньше
+(a >= b)                                    - больше или равно
+(a <= b)                                    - меньше или равно
+
+
+************************************        # операторы
+0...5                                       - от 0 до 5 включительно
+0..<5                                       - от 0 до 4 включительно
+
+for i in 0..<5 {                            - выведет 4 раза print((i))
+  print("\(i)")
+}
+
+typealias AlexNumber = Int                  - создать свой метод (макрос комманд!)
+
+
+
+
+************************************        # ПРИМЕРЫ
+for _ in 0...30 {
+
+  for i in 0..<20 {
+
+      if i == 10 {
+          break
+      }
+
+      print(i)
+  }
+}
+
+mainLoop: for _ in 0...30 {
+
+  for i in 0..<20 {
+
+  if i == 10 {
+      break mainLoop
+  }
+
+  print(i)
+  }
+}
+
+mainLoop: for _ in 0...30 {                  - lable mainLoop
+
+  if i < 15 {
+    continue
+  }
+
+  for i in 0..<20 {
+
+    if i == 10 {
+      break mainLoop
+    }
+
+    print(i)
+  }
+}

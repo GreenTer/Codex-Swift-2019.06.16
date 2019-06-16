@@ -1,0 +1,304 @@
+************************************        # переменные
+let                                         - константа
+var name                                    - переменная
+Int? Bool? Dual? String? Float?             - optional
+
+var tuple_0 : (name: String?, carNumber: Int?, mark: String?)
+var tuple_1 = (name_1:"Eva", name_2:"Lev")  - tuples создание
+var tuple_2 = (1, "Hello", true, 2.4)       - tuples создание
+var (show_name_1, Show_name_2) = tuple_1    - создали отдельные переменные к значениям tuples (show_name_1, Show_name_2)
+
+let/var name_array = [something]            - создать массив
+let constArray     = ["a", "b", "c", "d"]   - создать массив
+var array          = [String]()             - создать массив
+
+var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+var dictionary = [Int: String]()            - создать Dictionary [key:value]
+
+
+************************************        # enum, для создания перечислений 
+enum Action {
+    case Walk(meters: Int)                  - задаём характеристики для метода .Walk
+    case Run(meters: Int, speed: Int)       - задаём характеристики для метода .Run
+    case Stop
+    case Turn(direction: Direction)         - задаём характеристики для метода .Turn и присваиваем ему другой enum !!!
+
+    enum Direction : String {               - создали enum Direction для метода Turn в enum'e Action
+        case Left = "Left!"
+        case Right = "Right!"
+    }
+}
+
+-----------------                           # mutating в enum в func + mutating, для использования значения self
+enum CompassPoint {
+    case north, south, east, west
+    mutating func turnNorth() {
+        self = .north
+    }
+}
+var currentDirection = CompassPoint.west
+let rememberedDirection = currentDirection
+currentDirection.turnNorth()
+
+-----------------                           # enum Int
+enum Chess : Int {
+  static let numberOfPieces = 6
+  case King
+  case Queen
+  case Rook
+  case Bishop
+  case Knight
+  case Pawn
+}
+Chess.King      \\ 0
+Chess.Bishop    \\ 3
+
+
+************************************        # struct, для создания перечислений
+Computer Properties                         - не сохраняет значения сами в себя! Они используют другие переменные, для того чтобы сохранять и чтобы потом брать от туда информацию, и потом выдавать ее!
+Computer Properties                         - есть get & set, но нету обсерверов
+
+willSet                                     - Stored Properties - должен выполнить, при создании новой переменной (вызывается прямо перед сохранением значения)
+didSet                                      - Stored Properties - должен выполнить, при перезаписывании переменной (вызывается сразу после сохранения значения)
+get                                         - Computer Properties - принимает параметры
+set                                         - Computer Properties - выдаёт обработку заданного параметра
+
+lazy var                                    - lazy always var, переменная, которую не обязательно задействовать (иногда бывают условия когда надо)
+static let maxAge = 20                      - переменная, которая статична в классе(структуре) и ее ненадо запонять (должны быть дефолтные значения
+NameClassOrStructure.nameStatic             - так воспроизводить static переменную
+
+-----------------
+struct StudentStruct {                      // значения 
+    var name:String
+    var age:Int
+}
+
+func addOneYear(student: inout StudentStruct) {     - inout делает из Структуры, как Класс, т.к. в Структуре - переменная let
+    student.age += 1
+}
+
+let student_1 = StudentStruct.init(name: "Sasha", age: 27)
+
+-----------------
+import Foundation                           // add addon for object-c (all function with NString)
+struct Student {
+    
+    var firstName : String {
+        willSet {                                                         // willSet (что произойдёт после принятия переменной) - String - like firstName : String
+            print("will set " + newValue + " instead of " + firstName)    // newValue даётся изначально! если не присвоил своей переменной
+        }
+        didSet {
+            print("did set " + firstName + " instead of " + oldValue)
+
+            firstName = firstName.capitalized                             // object-c Capitalized first element !
+        }
+    }
+    
+    var lastName : String {
+        didSet {
+            lastName = lastName.capitalized                     // object-c Capitalized first element !
+        }
+    }
+    
+    var fullName : String {
+        get {                                                   // get так правильно оформляется
+            return firstName + " " + lastName                   // если используется только get (без set), тогда можно и get не использовать, а писать сразу условия
+        }
+        set {                                                   // newValue даётся переменная по умолчанию, либо в скобочках задать свою
+            print("fullName wants to be set to " + newValue)
+            
+            let words = newValue.components(separatedBy: " ")   // object-c (разбивает строку - на массивы, условия задали, что один объект записывается как наступает пробел и т.д. )
+            
+            if words.count > 0 {
+                firstName = words[0]
+            }
+            
+            if words.count > 1 {
+                lastName = words[1]
+            }
+        }
+    }
+}
+
+-----------------
+import Foundation
+struct Human {
+    static var maxLenght = 15
+    
+    var name : String {
+        willSet {
+            if newValue.count < Human.maxLenght {
+                print("Hello \(newValue)")
+            }
+        }
+        didSet {
+            if name.count > Human.maxLenght {
+                name = oldValue
+                print("Error")
+            }
+        }
+    }
+    var serName : String
+    
+    var fullName : String {
+        get {
+            return name + " " + serName
+        }
+        set {
+            let words = newValue.components(separatedBy: " ")
+            
+            if words.count > 0 {
+                name = words[0]
+            }
+            if words.count > 1 {
+                serName = words[1]
+            }
+        }
+    }
+}
+
+var sasha_1 = Human.init(name: "Sasha", serName: "Borovitsky")
+sasha_1.fullName
+sasha_1.fullName = "Vasua Pupkin"
+sasha_1.fullName
+sasha_1.name
+
+
+************************************        # class, для создания переменных со ссылкой (поменяешь в одном месте, поменяется ВЕЗДЕ, во всех переменных!!!)
+Stored Properties                           - сохраняет данные, непосредственно в самой Properties
+Stored Properties                           - есть обсерверы, но нету get & set
+willSet                                     - Stored Properties - должен выполнить, при создании новой переменной (вызывается прямо перед сохранением значения)
+didSet                                      - Stored Properties - должен выполнить, при перезаписывании переменной (вызывается сразу после сохранения значения)
+
+class StudentClass {                        // 
+    var name : String
+    var age : Int
+    
+    init() {                                // инициализация (она как предохранитель, значение по умолчанию!)
+        name = "No name"
+        age = 20
+    }
+    
+    init(name: String, age: Int) {          // условия для подробного заполнения данных(при создании переменной, смотреть ниже)
+        self.name = name                    // property name, это когда совпадают названия! В создании и инициализации
+        self.age = age
+    }
+}
+
+let student_1 = StudentClass.init(name: "Sasha", age: 27)
+
+let student_2 = StudentClass.init()
+student_2.name = "Sasha"
+student_2.age = 27
+
+-----------------
+let student_class_1 = StudentClass.init(name: "Sasha", age: 27)
+var student_class_2 = student_class_1
+student_class_2.name = "Alex"
+student_class_1.name                        // тоже станет "Alex"
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+************************************        # циклы перебор
+for name_цикла in name_переменной {}        - задаём имя цикла, для определенной переменной
+for (index.value) in array.enumerated() {}  - задаём цикл, с index и value
+
+
+************************************        # циклы true/false
+(==)                                        - «равенства»
+(!=)                                        - «неравенства»
+(&&) (&& = * означает true = 1, facle = 0)  - и (приоритет выше, чем у или)
+(||) (|| = + означает true = 1, facle = 0)  - или (приоритет ниже, чем у и)
+
+if условия {}                               - создание условий
+if array.count == 0 {}                      - если размерность массива == 0, то true\falce
+if array.isEmpty {}                         - оже самое что и выше, только проще
+
+let arraySortedUp = array.sorted{$0 < $1}   - Closures + sorted {$0 условие $1}
+c = (a < b) ? a : b                         - если (a < b) тогде если true - о выведет (а), а если falce то выведет (b)
+c = (a != nil) ? a : "nil"                  - если (a != nil) тогде если true - о выведет (а), а если falce то выведет ("nil")
+
+
+************************************        # ?? цикл для true
+c = n ?? x                                  - если true/falce nil? если да, то взять значение x
+var number1 = Int(var1) ?? 0                - если true тогда...
+
+
+
+
+-----------------                           # цикл switch (условия, для конкретной переменной, строки, выражения и т.д.)
+switch name {                               - метод для name
+  case 0...5 :                              - условия повтора от 0 до 5 включительно
+    print("something")
+  case "name" where age < 50 :              - условия для name где age < 50
+    print("Worker")
+  case let a as Int :                       - value banding
+    print("Int")
+  case _ as Int :                           - условия для переменной (wilecut) в нашем случае (проверяет все переменные), если она оказалась Int то..
+    print("Int")
+  case let (a,b) where a == b :             - условия для переменных (a,b) в нашем случае, если они оказалась Int то..
+    print("a==b")
+  case (_, let number) where number >= 65 && number <= 70 :
+    print("Hi old man")
+
+  default:                                  - использовать для вывода из цикла, либо когда пустая трока в цикле
+    break
+}
+
+-----------------                           - в условии, можно писать алфавит и цифры!
+case "a"..."z" : return true
+case "0"..."9" : return false
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+************************************        # функции (для замкнутости алгоритма)
+func sayHi() {}                             - создание функции
+func sayHi() -> () {}                       - создание функции
+self - всегда указывает на того товарища, которого вызвали
+Если этот метод вызвал класс, то он будет указывать на класс
+
+-----------------
+func addOneYear(var age: Int) {
+  age += 1
+}
+
+
+func fact(number: Int) -> Int {
+    
+    if number <= 1 {
+        return 1
+    }
+    return number * fact(number: number - 1)
+}
+fact(number: 5)
+
+
+************************************        # методы (mutating func)
+Используются внутри struct, enum
+self - всегда указывает на того товарища, которого вызвали
+Если метод вызвал энум, селф будет указывать на энум
+Если метод вызвал экземпляр класса, то он укажет на экземпляр класса
+
+-----------------
+struct Point {
+    var x : Int
+    var y : Int
+    
+//    mutating func move(byX x: Int, andY y: Int) { // mutating меняет саму property!
+//        self.x += x
+//        self.y += y
+//    }
+
+    mutating func move(byX x: Int, andY y: Int) { // mutating меняет саму property! (only for var)
+        self = Point(x: self.x + x, y: self.y + y)
+    }
+}
+
+var p = Point(x: 1, y: 1)
+p.move(byX: 2, andY: 3)
+p.x
+p.y

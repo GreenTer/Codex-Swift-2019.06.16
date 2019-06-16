@@ -1,0 +1,26 @@
+************************************        # переменные
+let                                         - константа
+var name                                    - переменная
+Int? Bool? Dual? String? Float?             - optional
+
+var tuple_0 : (name: String?, carNumber: Int?, mark: String?)
+var tuple_1 = (name_1:"Eva", name_2:"Lev")  - tuples создание
+var tuple_2 = (1, "Hello", true, 2.4)       - tuples создание
+var (show_name_1, Show_name_2) = tuple_1    - создали отдельные переменные к значениям tuples (show_name_1, Show_name_2)
+
+let/var name_array = [something]            - создать массив
+let constArray     = ["a", "b", "c", "d"]   - создать массив
+var array          = [String]()             - создать массив
+
+var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+var dictionary = [Int: String]()            - создать Dictionary [key:value]
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+************************************        # циклы перебор
+for name_цикла in name_переменной {}        - задаём имя цикла, для определенной переменной
+for (index.value) in array.enumerated() {}  - задаём цикл, с index и value
+
+-----------------                           # ци

@@ -1,0 +1,98 @@
+I. Определения
+
+************************************  # Рабочая среда
+1. subline / Far      - рабочая среда
+2. start ungit        - запуск в отдельном окне git
+3. start ruby app.rb  - запуск в отдельном окне сам сайт
+  - start rails s     - запустить в отдельном окне сам сайт
+
+-----------------
+start ungit                 - запустить в отдельном окне git
+git pull                    - загрузить изменения
+git clone                   - копировать репозиторий
+wget --no-check-certificate - скачать фаил без сертификата
+
+-----------------   # sublime табуляция 2пробела
+{
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  "detect_indentation": false
+}
+
+
+************************************  # команды (как выгружать сразу все фаилы и т.д.)
+sd FolderName               - перейти в корень папки
+
+git init                    - определить ветку, в которой находимся
+git status                  - посомтреть что за ветка, и какие есть комманды
+git add .                   - сделать коммит, данного репозитория
+git commit -m "comment"     - сделать commit с описанием
+git push                    - выгрузить всё в git
+
+git rm --cached NAMFEFILE.txt - удалить конкретный фаил из git pull
+
+-----------------
+start ungit                 - запустить в отдельном окне git
+git pull                    - загрузить изменения
+git clone                   - копировать репозиторий
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+II. Установка
+
+************************************        # Порядок установки и что качать
+https://putshello.wordpress.com/2014/08/14/installing-git-for-windows-git-ungit/
+
+-----------------   # Git-2.19.1-64-bit
+1. галочку Windows Explorer Itegrations убираем
+2. Ставим галочку Don't create a Start Menu folder
+3. Use Git from the Windows выбираем
+4. Checkout Windows выбираем
+
+
+5. Установка notejs
+C:\Program Files\nodejs\
+
+  # Добавить в Path
+  ;C:\Program Files\nodejs
+
+  # В командной строке вписать
+  npm install -g ungit
+
+  # В Far'e пишем
+  start ungit # чтобы запустился в отдельном окне
+
+  # В папке c:\Program Files\Git\usr\bin -> запускаем фаил ssh-keygen.exe
+  - C:\Users\GreenTer\.ssh\id_rsa # ничего вводить не нужно, просто Enter-Enter и создастся 2а фаила
+
+  # C:\Users\GreenTer\.ssh\id_rsa.pub
+  notepad id_rsa.pub - копируем содержимое и заходим в github.com - settings - SSH and GPG keys? создаём ключ
+
+git config --global user.name "GreenTer"
+git config --global user.email "thenewlife@tut.by"
+
+git init - привязать репозиторий к конкретной папке
+git clone https://github.com/bootstrap-ruby/sinatra-bootstrap
+
+6.Sinatra bootstrap clean
+  git clone https://github.com/rubyschool-us/sinatra-bootstrap-clean.git + заготовка сайта
+
+-----------------
+GreenTer
+
+thenewlife@tut.by
+vfrfrf5t
+4r3e2w1q
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+echo "# test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:GreenTer/test.git
+git push -u origin master

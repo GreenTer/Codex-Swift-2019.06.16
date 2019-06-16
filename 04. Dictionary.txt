@@ -1,0 +1,34 @@
+************************************        # dictionary
+var dictionary = [Int: String]()            - создать
+dictionary[16] = "sixteen"                  - ключ - значение, записывать
+
+var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+
+
+************************************        # добавить в dictionary
+dictionary["key_name"] = "value_name"       - добавить в dictionary
+dictionary.updateValue("value_name" : String, forKey: "key_name")   - добавить в dictionary
+
+
+************************************        # удалить из dictionary, или замена
+dictionary["key"] = nil                     - удалить пары ключ-значение
+dictionary.removeValue(forKey: "key")       - удалить пары ключ-значение
+dictionary = [:]                            - очистить весь dictionary
+
+
+************************************        # поиск по dictionary, сортировка
+dictionary.keys                             - вывести все ключи
+dictionary.keys.array                       - вывести все ключи array НЕ РАБОТАЕТ (смотреть пример, как я сделал)
+dictionary.values                           - вывести все значения
+dictionary.values.array                     - вывести все значения array
+dictionary.sorted()                         - сортировать по алфавиту(либо условия, какие зададим)/(или пишем условия, на результат Bool)
+
+
+************************************        # примеры
+var myDictionary = ["Hello": "Mister", "Sasha": "Borovitsky"]
+
+myDictionary.keys
+myDictionary.keys.first
+
+let arrayString = [String](myDictionary.keys)
+arrayString[1]

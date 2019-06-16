@@ -1,0 +1,17 @@
+************************************        #  tuples
+var tuple_1 = (name_1:"Eva", name_2:"Lev")  - tuples создание
+var tuple_2 = (1, "Hello", true, 2.4)       - tuples создание
+var (show_name_1, Show_name_2) = tuple_1    - создали отдельные переменные к значениям tuples (show_name_1, Show_name_2)
+
+tuple_1.name_1                              - выведет Eva
+tuple_1.0                                   - выведет Eva
+show_name_1                                 - выведет Eva
+
+tuple_1.name_1 = "Era"                      - изменить name_1 в тюплз вместо Eva, станет Era
+tuple_1.0      = "Era"                      - изменить name_1 в тюплз вместо Eva, станет Era
+show_name_1    = "Kolya"                    - изменить show_name_1 вместо Era, станет Kolya (в самом tuples как была Era, так и останется)
+
+  -----------------                           # пример 3
+  let tuple_1 = (x:1, y:2)                    // создали tuple_1 с одинаковыми названиями как у tuple_2
+  var tuple_2 = (x:4, y:3)                    // создали tuple_2 с одинаковыми названиями как у tuple_1
+  tuple_2 = tuple_1                           // так можно (если в тюплз совпадают название и количество параметров!)
