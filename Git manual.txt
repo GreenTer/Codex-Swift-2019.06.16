@@ -79,12 +79,6 @@ git clone https://github.com/bootstrap-ruby/sinatra-bootstrap
 6.Sinatra bootstrap clean
   git clone https://github.com/rubyschool-us/sinatra-bootstrap-clean.git + заготовка сайта
 
------------------
-GreenTer
-
-thenewlife@tut.by
-vfrfrf5t
-4r3e2w1q
 ************************************************************************************************************
 ************************************************************************************************************
 
